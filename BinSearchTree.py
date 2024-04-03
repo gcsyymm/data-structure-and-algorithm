@@ -43,9 +43,7 @@ class BinSearchTree:
         return self.val == val
 
     def clear_in_situ(self):
-        self.val = None
-        self.left = None
-        self.right = None
+        self = None
 
     def find_min(self):
         if self.left:
@@ -69,7 +67,9 @@ class BinSearchTree:
         # if the current node value equal the val
         else:
             # target has no child node
-            if not self.left and not self.right and self == parent.left:
+            if not self.left and not self.right and not parent:
+                self.clear_in_situ()
+            elif not self.left and not self.right and self == parent.left:
                 parent.left = None
                 self.clear_in_situ()
             elif not self.left and not self.right and self == parent.right:
@@ -97,11 +97,12 @@ class BinSearchTree:
 
 
 mytree = BinSearchTree(50)
-treevals = [21, 76, 4, 32, 64, 100, 52]
-for treeval in treevals:
-    mytree.insert_node(treeval)
+# treevals = [21, 76, 4, 32, 64, 100, 52]
+# for treeval in treevals:
+#     mytree.insert_node(treeval)
 
 
 mytree.pre_order()
-mytree.remove_node(21, None)
-mytree.pre_order()
+print(dir(mytree))
+mytree.remove_node(50, None)
+print(mytree)
